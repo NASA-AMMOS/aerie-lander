@@ -75,6 +75,3 @@ The project relies on the ability to effectively query the Git history
 * [Telling Stories Through Your Commits](https://blog.mocoso.co.uk/talks/2015/01/12/telling-stories-through-your-commits/)
 * [How to Make Your Code Reviewer Fall in Love with You](https://mtlynch.io/code-review-love/)
 
-## Asking for Help
-
-If you have a question, a great place to reach out is the mpsa-aerie Slack channel.
