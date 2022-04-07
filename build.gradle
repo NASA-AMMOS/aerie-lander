@@ -55,12 +55,10 @@ allprojects {
     maven {
       name = "GitHubPackages"
       url = "https://maven.pkg.github.com/nasa-ammos/aerie"
-      if (project.hasProperty('GITHUB_ACTOR')) {
         credentials {
-          username GITHUB_ACTOR
-          password GITHUB_TOKEN
+          username = System.getenv('GITHUB_ACTOR')
+          password = System.getenv('GITHUB_TOKEN')
         }
-      }
     }
   }
 }

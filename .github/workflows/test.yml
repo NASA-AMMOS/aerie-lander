@@ -11,6 +11,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      packages: read
+      checks: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -25,20 +28,24 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Build Classes
         run: ./gradlew classes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Assemble
         run: ./gradlew assemble
       - name: Run Unit Tests
         run: ./gradlew test
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Report JUnit Test Results
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: ☕ JUnit Results
-          path: "**/build/test-results/**/TEST-*.xml"
+          path: "build/test-results/**/TEST-*.xml"
           reporter: java-junit
       - name: Upload JUnit Test Results
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: ☕ JUnit Results
-          path: "**/build/test-results/**/TEST-*.xml"
+          path: "build/test-results/**/TEST-*.xml"
