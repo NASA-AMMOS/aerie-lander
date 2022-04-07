@@ -26,13 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       actions: read
+      packages: read
       contents: read
       security-events: write
 
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'java', 'javascript' ]
+        language: [ 'java']
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
         # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
@@ -51,11 +52,6 @@ jobs:
         # Prefix the list here with "+" to use these queries and those in the config file.
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
-
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
 
@@ -63,9 +59,17 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    #- run: |
-    #   make bootstrap
-    #   make release
+
+    - name: Validate Gradle Wrapper
+      uses: gradle/wrapper-validation-action@v1
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    - name: Build Classes
+      run: ./gradlew classes
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: Assemble
+      run: ./gradlew assemble
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
