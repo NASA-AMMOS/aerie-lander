@@ -1,4 +1,4 @@
-[![Build Status](https://cae-jenkins2.jpl.nasa.gov/buildStatus/icon?job=MPSA/SEQ/normal_builds/aerie/develop)](https://cae-jenkins2.jpl.nasa.gov/job/MPSA/job/SEQ/job/normal_builds/job/aerie/job/merlinsight)
+https://github.com/NASA-AMMOS/aerie-lander/actions/workflows/test.yml/badge.svg
 
 # Aerie Lander
 
