@@ -1,4 +1,4 @@
-https://github.com/NASA-AMMOS/aerie-lander/actions/workflows/test.yml/badge.svg
+![test](https://github.com/NASA-AMMOS/aerie-lander/actions/workflows/test.yml/badge.svg)
 
 # Aerie Lander
 
