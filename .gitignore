@@ -1,0 +1,36 @@
+## Cache ##
+.DS_Store
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.sts4-cache
+
+### IDE's ###
+.idea
+.vscode
+*.iml
+*.ipr
+*.iws
+**/target/*
+.*.swp
+
+### Build ###
+.m2
+*.local
+*.tar.gz
+/.nb-gradle/
+/build/
+/dist/
+/nbbuild/
+/nbdist/
+/nbproject/private/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

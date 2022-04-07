@@ -1,0 +1,23 @@
+import java.nio.file.Path
+
+rootProject.name = 'aerielander'
+
+if (useLocalAerie == "true") {
+  def fullAeriePath = Path.of(rootProject.projectDir.absolutePath.toString(), localAeriePath)
+    
+  include ':contrib',
+          ':merlin-driver',
+          ':merlin-framework',
+          ':merlin-framework-junit',
+          ':merlin-framework-processor',
+          ':merlin-sdk',
+          ':parsing-utilities'
+
+  project(':contrib').projectDir                    = fullAeriePath.resolve('contrib').toFile()
+  project(':merlin-driver').projectDir              = fullAeriePath.resolve('merlin-driver').toFile()
+  project(':merlin-framework').projectDir           = fullAeriePath.resolve('merlin-framework').toFile()
+  project(':merlin-framework-junit').projectDir     = fullAeriePath.resolve('merlin-framework-junit').toFile()
+  project(':merlin-framework-processor').projectDir = fullAeriePath.resolve('merlin-framework-processor').toFile()
+  project(':merlin-sdk').projectDir                 = fullAeriePath.resolve('merlin-sdk').toFile()
+  project(':parsing-utilities').projectDir          = fullAeriePath.resolve('parsing-utilities').toFile()
+}

@@ -1,0 +1,563 @@
+{
+  "name": "from-scratch",
+  "adaptationId": "unknown",
+  "startTimestamp": "2018-338T17:00:00",
+  "endTimestamp": "2018-340T00:00:00",
+  "activityInstances": [
+  {
+    "type": "Wake",
+    "startTimestamp": "2018-338T18:08:56.583",
+    "parameters": {
+      "wakeType": "DIAGNOSTIC",
+      "duration": 836000000,
+      "seqid": "nf0008_03"
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-338T20:11:31.400",
+    "parameters": {
+      "wakeType": "FULL",
+      "duration": 11967000000,
+      "seqid": "nf0008_04"
+    }
+  }, {
+    "type": "IDCHeatersOn",
+    "startTimestamp": "2018-338T20:21:53.428",
+    "parameters": {
+      "duration": 1200000000
+    }
+  }, {
+    "type": "ICCHeatersOn",
+    "startTimestamp": "2018-338T20:21:53.428",
+    "parameters": {
+      "duration": 1200000000
+    }
+  }, {
+    "type": "IDSGeneric",
+    "startTimestamp": "2018-338T20:42:03.813",
+    "parameters": {
+      "nonDecisionalDataVol": 0.0,
+      "externalEnergy": 9.5,
+      "duration": 1800000000,
+      "decisionalDataVol": 22.1
+    }
+  }, {
+    "type": "ICCImages",
+    "startTimestamp": "2018-338T21:15:04.815",
+    "parameters": {
+      "compQuality": 0,
+      "apid": "APID_ICC_1",
+      "duration": 240000000,
+      "nFrames": 2
+    }
+  }, {
+    "type": "IDCImages",
+    "startTimestamp": "2018-338T21:20:04.843",
+    "parameters": {
+      "compQuality": 95,
+      "apid": "APID_IDC_1",
+      "duration": 240000000,
+      "nFrames": 6
+    }
+  }, {
+    "type": "Cleanup",
+    "startTimestamp": "2018-338T21:25:04.870",
+    "parameters": {
+      "clean_idc": true,
+      "clean_icc": true,
+      "clean_ida": true,
+      "clean_apss": false,
+      "clean_HeatProbe": false,
+      "clean_evnt": false,
+      "clean_seis": false,
+      "clean_eng": false
+    }
+  }, {
+    "type": "RADIdle",
+    "startTimestamp": "2018-338T21:25:40.833",
+    "parameters": {
+      "duration": 60000000
+    }
+  }, {
+    "type": "HeatProbeGeneric",
+    "startTimestamp": "2018-338T21:26:51.730",
+    "parameters": {
+      "externalEnergy": 0.0,
+      "actID": 0,
+      "duration": 60000000,
+      "HeatProbeSciData": 0.0,
+      "beeEnergy": 0.0
+    }
+  }, {
+    "type": "SeisGeneric",
+    "startTimestamp": "2018-338T21:30:16.200",
+    "parameters": {
+      "externalEnergy": 0.0,
+      "eboxEnergy": 0.0,
+      "recHKVolume": 0.3,
+      "duration": 120000000,
+      "continuousSciVolume": 0.0
+    }
+  }, {
+    "type": "SeisGeneric",
+    "startTimestamp": "2018-338T21:33:17.038",
+    "parameters": {
+      "externalEnergy": 2.5,
+      "eboxEnergy": 2.5,
+      "recHKVolume": 0.0,
+      "duration": 300000000,
+      "continuousSciVolume": 5.0
+    }
+  }, {
+    "type": "SeisGeneric",
+    "startTimestamp": "2018-338T21:39:17.688",
+    "parameters": {
+      "externalEnergy": 2.5,
+      "eboxEnergy": 2.5,
+      "recHKVolume": 0.0,
+      "duration": 3600000000,
+      "continuousSciVolume": 2.0
+    }
+  }, {
+    "type": "PayGetData",
+    "startTimestamp": "2018-338T22:54:16.045",
+    "parameters": {
+      "seisTimeout": 600000000,
+      "apssTimeout": 600000000,
+      "event_duration": 0
+    }
+  }, {
+    "type": "HeatProbeGetSciData",
+    "startTimestamp": "2018-338T22:54:21.182",
+    "parameters": {
+      "timeout": 1200000000
+    }
+  }, {
+    "type": "Cleanup",
+    "startTimestamp": "2018-338T23:16:21.509",
+    "parameters": {
+      "clean_idc": false,
+      "clean_icc": false,
+      "clean_ida": false,
+      "clean_apss": true,
+      "clean_HeatProbe": true,
+      "clean_evnt": false,
+      "clean_seis": true,
+      "clean_eng": false
+    }
+  }, {
+    "type": "ICCImages",
+    "startTimestamp": "2018-338T23:35:23.051",
+    "parameters": {
+      "compQuality": 80,
+      "apid": "APID_ICC_3",
+      "duration": 60000000,
+      "nFrames": 4
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T00:36:37.981",
+    "parameters": {
+      "wakeType": "FULL",
+      "duration": 4652000000,
+      "seqid": "nf0008_05"
+    }
+  }, {
+    "type": "PayGetData",
+    "startTimestamp": "2018-339T00:49:06.401",
+    "parameters": {
+      "seisTimeout": 600000000,
+      "apssTimeout": 600000000,
+      "event_duration": 0
+    }
+  }, {
+    "type": "Cleanup",
+    "startTimestamp": "2018-339T01:16:11.892",
+    "parameters": {
+      "clean_idc": false,
+      "clean_icc": false,
+      "clean_ida": false,
+      "clean_apss": true,
+      "clean_HeatProbe": true,
+      "clean_evnt": false,
+      "clean_seis": true,
+      "clean_eng": false
+    }
+  }, {
+    "type": "SeisGeneric",
+    "startTimestamp": "2018-339T01:16:11.892",
+    "parameters": {
+      "externalEnergy": 0.0,
+      "eboxEnergy": 0.0,
+      "recHKVolume": 0.0,
+      "duration": 240000000,
+      "continuousSciVolume": 0.0
+    }
+  }, {
+    "type": "UHFComm",
+    "startTimestamp": "2018-339T01:21:53.981",
+    "parameters": {
+      "LNUT": "2000-001T00:00:00.000",
+      "returnRate": 32,
+      "iv_diag_data": "DIAG_DATA",
+      "lastBitTime": "2018-331T01:25:39.000",
+      "forwardRate": 8,
+      "firstBitTime": "2018-331T01:22:47.000",
+      "returnLinkVol": 50.0,
+      "hailDuration": 840000000,
+      "maxElevation": 33.297991,
+      "overflightID": "MRO_NSY_2018_338_02",
+      "iv_encoding": "RS_OFF"
+    }
+  }, {
+    "type": "IDCImages",
+    "startTimestamp": "2018-339T01:22:28.982",
+    "parameters": {
+      "compQuality": 0,
+      "apid": "APID_IDC_6",
+      "duration": 60000000,
+      "nFrames": 1
+    }
+  }, {
+    "type": "IDCImages",
+    "startTimestamp": "2018-339T01:50:29.957",
+    "parameters": {
+      "compQuality": 10,
+      "apid": "APID_IDC_1",
+      "duration": 60000000,
+      "nFrames": 10
+    }
+  }, {
+    "type": "UpdateDart",
+    "startTimestamp": "2018-339T01:50:29.957",
+    "parameters": {
+      "dartConfig": "dwn_dart_monitoring",
+      "duration": 60000000
+    }
+  }, {
+    "type": "UpdateFpt",
+    "startTimestamp": "2018-339T01:50:29.957",
+    "parameters": {
+      "duration": 60000000,
+      "fptConfig": "dwn_fpt_ids_science"
+    }
+  }, {
+    "type": "HeatProbeGetSciData",
+    "startTimestamp": "2018-339T01:55:21.765",
+    "parameters": {
+      "timeout": 1200000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T02:46:39.733",
+    "parameters": {
+      "wakeType": "FULL",
+      "duration": 3545668000,
+      "seqid": "nf0008_06"
+    }
+  }, {
+    "type": "PayGetData",
+    "startTimestamp": "2018-339T02:57:05.871",
+    "parameters": {
+      "seisTimeout": 600000000,
+      "apssTimeout": 600000000,
+      "event_duration": 0
+    }
+  }, {
+    "type": "IDCHeatersOn",
+    "startTimestamp": "2018-339T02:57:11.008",
+    "parameters": {
+      "duration": 1200000000
+    }
+  }, {
+    "type": "ICCImages",
+    "startTimestamp": "2018-339T03:09:06.142",
+    "parameters": {
+      "compQuality": 90,
+      "apid": "APID_ICC_2",
+      "duration": 60000000,
+      "nFrames": 2
+    }
+  }, {
+    "type": "IDCImages",
+    "startTimestamp": "2018-339T03:09:06.142",
+    "parameters": {
+      "compQuality": 75,
+      "apid": "APID_IDC_4",
+      "duration": 60000000,
+      "nFrames": 1
+    }
+  }, {
+    "type": "IDSGeneric",
+    "startTimestamp": "2018-339T03:17:12.145",
+    "parameters": {
+      "nonDecisionalDataVol": 4.7,
+      "externalEnergy": 4.3,
+      "duration": 600000000,
+      "decisionalDataVol": 0.0
+    }
+  }, {
+    "type": "Cleanup",
+    "startTimestamp": "2018-339T03:28:12.822",
+    "parameters": {
+      "clean_idc": true,
+      "clean_icc": false,
+      "clean_ida": true,
+      "clean_apss": false,
+      "clean_HeatProbe": false,
+      "clean_evnt": false,
+      "clean_seis": false,
+      "clean_eng": false
+    }
+  }, {
+    "type": "APSSChangeAcqConfig",
+    "startTimestamp": "2018-339T03:28:44.675",
+    "parameters": {
+      "twinsPyOn": false,
+      "_28vOn": true,
+      "paeOn": true,
+      "psOn": true,
+      "twinsMySetpoint": -75,
+      "twinsPySetpoint": -90,
+      "twinsMyOn": true,
+      "ifgOn": true,
+      "duration": 195000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T03:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "SSAMonitoring",
+    "startTimestamp": "2018-339T03:32:45.108",
+    "parameters": {
+      "duration": 60000000
+    }
+  }, {
+    "type": "Cleanup",
+    "startTimestamp": "2018-339T03:35:06.901",
+    "parameters": {
+      "clean_idc": false,
+      "clean_icc": false,
+      "clean_ida": false,
+      "clean_apss": true,
+      "clean_HeatProbe": true,
+      "clean_evnt": false,
+      "clean_seis": false,
+      "clean_eng": false
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T04:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T05:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T06:01:52.696",
+    "parameters": {
+      "wakeType": "DIAGNOSTIC",
+      "duration": 1000000,
+      "seqid": "nf0008_07"
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T06:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T07:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T08:31:55.991",
+    "parameters": {
+      "wakeType": "DIAGNOSTIC",
+      "duration": 1000000,
+      "seqid": "nf0008_08"
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T08:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T09:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T10:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T11:01:59.286",
+    "parameters": {
+      "wakeType": "DIAGNOSTIC",
+      "duration": 616495000,
+      "seqid": "nf0008_09"
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T11:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T12:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T13:21:31.221",
+    "parameters": {
+      "wakeType": "DIAGNOSTIC",
+      "duration": 1000000,
+      "seqid": "nf0009_01"
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T13:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T14:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T15:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T15:44:42.661",
+    "parameters": {
+      "wakeType": "FULL",
+      "duration": 9529166000,
+      "seqid": "nf0009_02"
+    }
+  }, {
+    "type": "PayGetData",
+    "startTimestamp": "2018-339T15:54:58.661",
+    "parameters": {
+      "seisTimeout": 1200000000,
+      "apssTimeout": 1200000000,
+      "event_duration": 6352166000
+    }
+  }, {
+    "type": "HeatProbeGetSciData",
+    "startTimestamp": "2018-339T15:54:59.661",
+    "parameters": {
+      "timeout": 3600000000
+    }
+  }, {
+    "type": "XBandComm",
+    "startTimestamp": "2018-339T15:59:58.661",
+    "parameters": {
+      "DSNTrack": "DSS-43",
+      "xbandTxDuration": 3000000000,
+      "dataVolMbits": 0.83,
+      "initialRtOnlyDuration": 300000000,
+      "mnemonic": "sol0009_AM_EMGA",
+      "ulRate": "500_BPS",
+      "dlRate": "250_BPS",
+      "delayToTxOn": 300000000,
+      "xbandAntSel": "EAST_MGA"
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T16:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T17:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "UHFComm",
+    "startTimestamp": "2018-339T17:47:15.827",
+    "parameters": {
+      "LNUT": "2000-001T00:00:00.000",
+      "returnRate": 32,
+      "iv_diag_data": "NO_DIAG_DATA",
+      "lastBitTime": "2018-331T01:25:39.000",
+      "forwardRate": 8,
+      "firstBitTime": "2018-331T01:22:47.000",
+      "returnLinkVol": 50.0,
+      "hailDuration": 1080000000,
+      "maxElevation": 33.297991,
+      "overflightID": "ODY_NSY_2018_339_01",
+      "iv_encoding": "RS_OFF"
+    }
+  }, {
+    "type": "Cleanup",
+    "startTimestamp": "2018-339T18:09:30.827",
+    "parameters": {
+      "clean_idc": false,
+      "clean_icc": false,
+      "clean_ida": false,
+      "clean_apss": true,
+      "clean_HeatProbe": true,
+      "clean_evnt": true,
+      "clean_seis": true,
+      "clean_eng": false
+    }
+  }, {
+    "type": "HeatProbeTemP",
+    "startTimestamp": "2018-339T18:32:45.108",
+    "parameters": {
+      "setNewSSATime": true,
+      "duration": 300000000
+    }
+  }, {
+    "type": "Wake",
+    "startTimestamp": "2018-339T18:48:31.827",
+    "parameters": {
+      "wakeType": "DIAGNOSTIC",
+      "duration": 836000000,
+      "seqid": "nf0009_03"
+    }
+  }]
+}

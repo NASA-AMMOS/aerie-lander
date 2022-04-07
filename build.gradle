@@ -1,0 +1,66 @@
+plugins {
+  id 'java-library'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+    vendor = JvmVendorSpec.ADOPTOPENJDK
+  }
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
+
+test {
+  useJUnitPlatform()
+}
+
+dependencies {
+  if (useLocalAerie == "true") {
+    compileOnly project(':contrib')
+    compileOnly project(':merlin-framework')
+    implementation project(':parsing-utilities')
+    annotationProcessor project(':merlin-framework-processor')
+
+    testImplementation project(':contrib')
+    testImplementation project(':merlin-framework')
+    testImplementation project(':merlin-sdk')
+    testImplementation project(':merlin-driver')
+    testImplementation project(':merlin-framework-junit')
+  }
+  else {
+    compileOnly 'gov.nasa.jpl.aerie:contrib:0.11.0-SNAPSHOT-+'
+    compileOnly 'gov.nasa.jpl.aerie:merlin-framework:0.11.0-SNAPSHOT-+'
+    implementation 'gov.nasa.jpl.aerie:parsing-utilities:0.11.0-SNAPSHOT-+'
+    annotationProcessor 'gov.nasa.jpl.aerie:merlin-framework-processor:0.11.0-SNAPSHOT-+'
+
+    testImplementation 'gov.nasa.jpl.aerie:contrib:0.11.0-SNAPSHOT-+'
+    testImplementation 'gov.nasa.jpl.aerie:merlin-driver:0.11.0-SNAPSHOT-+'
+    testImplementation 'gov.nasa.jpl.aerie:merlin-framework-junit:0.11.0-SNAPSHOT-+'
+  }
+
+  testImplementation 'org.assertj:assertj-core:3.22.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+allprojects {
+  repositories {
+    // Search the local filesystem before attempting remote repositories.
+    flatDir { dirs "$rootDir/third-party" }
+    mavenCentral()
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/nasa-ammos/aerie"
+      if (project.hasProperty('GITHUB_ACTOR')) {
+        credentials {
+          username GITHUB_ACTOR
+          password GITHUB_TOKEN
+        }
+      }
+    }
+  }
+}
