@@ -2,7 +2,11 @@ import java.nio.file.Path
 
 rootProject.name = 'aerielander'
 
-if (useLocalAerie == "true") {
+if (!['true', 'false'].any { useLocalAerie.equalsIgnoreCase(it) }) {
+    throw new GradleException("Property 'useLocalAerie' must be either 'true' or 'false' (case-insensitive). Found: '$useLocalAerie'")
+}
+
+if (useLocalAerie.equalsIgnoreCase('true')) {
   def fullAeriePath = Path.of(rootProject.projectDir.absolutePath.toString(), localAeriePath)
     
   include ':contrib',
