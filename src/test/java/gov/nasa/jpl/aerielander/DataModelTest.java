@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public final class DataModelTest {
 
     public DefaultConfigurationTests(final MerlinTestContext<ActivityTypes, Mission> ctx) {
       final var config = Configuration.defaultConfiguration();
-      mission = new Mission(ctx.registrar(), config);
+      mission = new Mission(ctx.registrar(), Instant.EPOCH, config);
       ctx.use(mission, ActivityTypes::register);
       dataModel = mission.dataModel;
     }
@@ -192,7 +193,7 @@ public final class DataModelTest {
               OrbiterConfiguration.defaults
           )
       );
-      mission = new Mission(ctx.registrar(), config);
+      mission = new Mission(ctx.registrar(), Instant.EPOCH, config);
       ctx.use(mission, ActivityTypes::register);
       dataModel = mission.dataModel;
     }

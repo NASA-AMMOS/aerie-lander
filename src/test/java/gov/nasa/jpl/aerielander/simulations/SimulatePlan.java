@@ -32,7 +32,7 @@ public final class SimulatePlan {
   private static MissionModel<RootModel<ActivityTypes, Mission>> makeMissionModel(final MissionModelBuilder builder, final Configuration config) {
     final var factory = new GeneratedMissionModelFactory();
     final var registry = DirectiveTypeRegistry.extract(factory);
-    final var model = factory.instantiate(registry.registry(), config, builder);
+    final var model = factory.instantiate(registry.registry(), Instant.EPOCH, config, builder);
     return builder.build(model, factory.getConfigurationType(), registry);
   }
 

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import java.time.Instant;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class APSSPaeDataRecoveryTest {
 
@@ -18,7 +20,7 @@ public class APSSPaeDataRecoveryTest {
   private final Mission mission;
 
   public APSSPaeDataRecoveryTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
-    this.mission = new Mission(ctx.registrar(), Configuration.defaultConfiguration());
+    this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
     ctx.use(mission, ActivityTypes::register);
   }
 
