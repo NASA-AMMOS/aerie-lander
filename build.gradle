@@ -31,14 +31,14 @@ dependencies {
     testImplementation project(':merlin-framework-junit')
   }
   else {
-    compileOnly 'gov.nasa.jpl.aerie:contrib:0.11.0-SNAPSHOT-+'
-    compileOnly 'gov.nasa.jpl.aerie:merlin-framework:0.11.0-SNAPSHOT-+'
-    implementation 'gov.nasa.jpl.aerie:parsing-utilities:0.11.0-SNAPSHOT-+'
-    annotationProcessor 'gov.nasa.jpl.aerie:merlin-framework-processor:0.11.0-SNAPSHOT-+'
+    compileOnly 'gov.nasa.jpl.aerie:contrib:0.13.0-SNAPSHOT-+'
+    compileOnly 'gov.nasa.jpl.aerie:merlin-framework:0.13.0-SNAPSHOT-+'
+    implementation 'gov.nasa.jpl.aerie:parsing-utilities:0.13.0-SNAPSHOT-+'
+    annotationProcessor 'gov.nasa.jpl.aerie:merlin-framework-processor:0.13.0-SNAPSHOT-+'
 
-    testImplementation 'gov.nasa.jpl.aerie:contrib:0.11.0-SNAPSHOT-+'
-    testImplementation 'gov.nasa.jpl.aerie:merlin-driver:0.11.0-SNAPSHOT-+'
-    testImplementation 'gov.nasa.jpl.aerie:merlin-framework-junit:0.11.0-SNAPSHOT-+'
+    testImplementation 'gov.nasa.jpl.aerie:contrib:0.13.0-SNAPSHOT-+'
+    testImplementation 'gov.nasa.jpl.aerie:merlin-driver:0.13.0-SNAPSHOT-+'
+    testImplementation 'gov.nasa.jpl.aerie:merlin-framework-junit:0.13.0-SNAPSHOT-+'
   }
 
   testImplementation 'org.assertj:assertj-core:3.22.0'
