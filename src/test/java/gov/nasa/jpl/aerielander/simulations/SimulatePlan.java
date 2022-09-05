@@ -29,7 +29,7 @@ public final class SimulatePlan {
     simulatePlan(new MissionModelBuilder(), "merlin-test-filtered.json", 1);
   }
 
-  private static MissionModel<RootModel<ActivityTypes, Mission>> makeMissionModel(final MissionModelBuilder builder, final Configuration config) {
+  private static MissionModel<RootModel<Mission>> makeMissionModel(final MissionModelBuilder builder, final Configuration config) {
     final var factory = new GeneratedMissionModelFactory();
     final var registry = DirectiveTypeRegistry.extract(factory);
     final var model = factory.instantiate(Instant.EPOCH, config, builder);
