@@ -5,6 +5,7 @@ import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinTestContext;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
 import gov.nasa.jpl.aerielander.generated.ActivityTypes;
+import gov.nasa.jpl.aerielander.generated.GeneratedMissionModelFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -21,7 +22,7 @@ public class APSSPaeDataRecoveryTest {
 
   public APSSPaeDataRecoveryTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
     this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
-    ctx.use(mission, ActivityTypes::register);
+    ctx.use(mission, GeneratedMissionModelFactory.model);
   }
 
   @Test
