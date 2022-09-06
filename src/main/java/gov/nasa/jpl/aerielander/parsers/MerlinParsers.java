@@ -1,8 +1,8 @@
 package gov.nasa.jpl.aerielander.parsers;
 
-import gov.nasa.jpl.aerie.json.Iso;
 import gov.nasa.jpl.aerie.json.JsonParseResult;
 import gov.nasa.jpl.aerie.json.JsonParser;
+import gov.nasa.jpl.aerie.json.SchemaCache;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -24,7 +24,7 @@ public abstract class MerlinParsers {
     private MerlinParsers() {}
     public static final JsonParser<Timestamp> timestampP = new JsonParser<>() {
         @Override
-        public JsonObject getSchema(final Map<Object, String> anchors) {
+        public JsonObject getSchema(final SchemaCache anchors) {
             return Json
                     .createObjectBuilder(stringP.getSchema())
                     .add("format", "date-time")
@@ -59,10 +59,9 @@ public abstract class MerlinParsers {
             . field("type", stringP)
             . field("startTimestamp", timestampP)
             . field("parameters", mapP(serializedValueP))
-            . map(Iso.of(
-                    untuple((type, startTimestamp, parameters) ->
-                            new ActivityInstance(type, startTimestamp, parameters)),
-                    activity -> tuple(activity.type, activity.startTimestamp, activity.parameters)));
+            . map(untuple((type, startTimestamp, parameters) ->
+                      new ActivityInstance(type, startTimestamp, parameters)),
+                  activity -> tuple(activity.type, activity.startTimestamp, activity.parameters));
 
     public static final JsonParser<NewPlan> newPlanP
             = productP
@@ -72,9 +71,8 @@ public abstract class MerlinParsers {
             . field("endTimestamp", timestampP)
             . optionalField("activityInstances", listP(activityInstanceP))
             . optionalField("configuration", mapP(serializedValueP))
-            . map(Iso.of(
-                    untuple((name, adaptationId, startTimestamp, endTimestamp, activityInstances, configuration) ->
-                            new NewPlan(name, adaptationId, startTimestamp, endTimestamp, activityInstances.orElse(List.of()), configuration.orElse(Map.of()))),
-                    $ -> tuple($.name, $.adaptationId, $.startTimestamp, $.endTimestamp, Optional.of($.activityInstances), Optional.of($.configuration))));
+            . map(untuple((name, adaptationId, startTimestamp, endTimestamp, activityInstances, configuration) ->
+                      new NewPlan(name, adaptationId, startTimestamp, endTimestamp, activityInstances.orElse(List.of()), configuration.orElse(Map.of()))),
+                  $ -> tuple($.name, $.adaptationId, $.startTimestamp, $.endTimestamp, Optional.of($.activityInstances), Optional.of($.configuration)));
 
 }

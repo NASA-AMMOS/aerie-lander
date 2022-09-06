@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import java.time.Instant;
+
 import static gov.nasa.jpl.aerie.merlin.framework.ModelActions.delay;
 import static gov.nasa.jpl.aerielander.generated.ActivityActions.spawn;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +26,7 @@ public class ChangeDefaultDartTest {
   private final Mission mission;
 
   public ChangeDefaultDartTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
-    this.mission = new Mission(ctx.registrar(), Configuration.defaultConfiguration());
+    this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
     ctx.use(mission, ActivityTypes::register);
   }
 

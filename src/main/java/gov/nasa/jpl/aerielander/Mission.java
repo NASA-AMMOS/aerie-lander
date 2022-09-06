@@ -14,6 +14,8 @@ import gov.nasa.jpl.aerielander.models.seis.SeisModel;
 import gov.nasa.jpl.aerielander.models.time.Clocks;
 import gov.nasa.jpl.aerielander.models.wake.WakeModel;
 
+import java.time.Instant;
+
 import static gov.nasa.jpl.aerielander.models.time.Time.Mars_Time_Origin;
 
 public final class Mission {
@@ -30,7 +32,7 @@ public final class Mission {
   public final APSSModel apssModel;
   public final SeisModel seisModel;
 
-  public Mission(final Registrar registrar, final Configuration config) {
+  public Mission(final Registrar registrar, final Instant planStart, final Configuration config) {
     this.config = config;
     this.clocks = new Clocks(Mars_Time_Origin);
     this.dataModel = new DataModel();
