@@ -33,7 +33,7 @@ public final class SimulatePlan {
     final var factory = new GeneratedMissionModelFactory();
     final var registry = DirectiveTypeRegistry.extract(factory);
     final var model = factory.instantiate(Instant.EPOCH, config, builder);
-    return builder.build(model, factory.getConfigurationType(), registry);
+    return builder.build(model, registry);
   }
 
   public static void simulatePlan(final MissionModelBuilder builder, final String planName, final int numberSims) {
