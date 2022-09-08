@@ -6,7 +6,6 @@ import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
 import gov.nasa.jpl.aerielander.generated.ActivityTypes;
-import gov.nasa.jpl.aerielander.generated.GeneratedMissionModelFactory;
 import gov.nasa.jpl.aerielander.models.apss.APSSModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -29,7 +28,7 @@ public class APSSTwinsBoomSwapTest {
 
   public APSSTwinsBoomSwapTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
     this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
-    ctx.use(mission, GeneratedMissionModelFactory.model);
+    ctx.use(mission);
   }
 
   @Test

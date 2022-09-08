@@ -12,7 +12,6 @@ import gov.nasa.jpl.aerielander.config.OrbiterConfiguration;
 import gov.nasa.jpl.aerielander.config.OrbiterParams;
 import gov.nasa.jpl.aerielander.config.SchedulingParams;
 import gov.nasa.jpl.aerielander.generated.ActivityTypes;
-import gov.nasa.jpl.aerielander.generated.GeneratedMissionModelFactory;
 import gov.nasa.jpl.aerielander.models.comm.CommModel;
 import gov.nasa.jpl.aerielander.models.data.DataConfig;
 import gov.nasa.jpl.aerielander.models.data.DataModel;
@@ -49,7 +48,7 @@ public final class DataModelTest {
     public DefaultConfigurationTests(final MerlinTestContext<ActivityTypes, Mission> ctx) {
       final var config = Configuration.defaultConfiguration();
       mission = new Mission(ctx.registrar(), Instant.EPOCH, config);
-      ctx.use(mission, GeneratedMissionModelFactory.model);
+      ctx.use(mission);
       dataModel = mission.dataModel;
     }
 
@@ -195,7 +194,7 @@ public final class DataModelTest {
           )
       );
       mission = new Mission(ctx.registrar(), Instant.EPOCH, config);
-      ctx.use(mission, GeneratedMissionModelFactory.model);
+      ctx.use(mission);
       dataModel = mission.dataModel;
     }
 

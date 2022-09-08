@@ -6,7 +6,6 @@ import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
 import gov.nasa.jpl.aerielander.generated.ActivityTypes;
-import gov.nasa.jpl.aerielander.generated.GeneratedMissionModelFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -30,7 +29,7 @@ public class APSSGenericTest {
 
   public APSSGenericTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
     this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
-    ctx.use(mission, GeneratedMissionModelFactory.model);
+    ctx.use(mission);
   }
 
   @Test
