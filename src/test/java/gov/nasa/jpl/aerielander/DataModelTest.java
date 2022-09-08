@@ -136,7 +136,7 @@ public final class DataModelTest {
       vc01.increaseDataRate(-20);
       vc02.increaseDataRate(-20);
 
-      spawn(new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
+      spawn(mission, new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
 
       // All channels should start with 20 MBits
       var expectedVC00data = 20.0;
@@ -216,7 +216,7 @@ public final class DataModelTest {
       vc01.increaseDataRate(-20);
       vc02.increaseDataRate(-20);
 
-      spawn(new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
+      spawn(mission, new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
 
       // All channels should start with 20 MBits
       var expectedVC00data = 20.0;
@@ -267,7 +267,7 @@ public final class DataModelTest {
       vc02.increaseDataRate(-20);
 
       mission.commModel.setAlternateUhfBlockInUse(CommModel.Orbiter.ODY, true);
-      spawn(new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
+      spawn(mission, new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
 
       // All channels should start with 20 MBits
       var expectedVC00data = 20.0;

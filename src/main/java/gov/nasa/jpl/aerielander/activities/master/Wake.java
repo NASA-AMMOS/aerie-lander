@@ -35,14 +35,14 @@ public final class Wake {
     dataModel.setInstrumentHKRate(wakeType, hkModel.DUMP_CMD_HISTORY, hkModel.DUMP_CMD_HISTORY.defaultFullWakeRate, hkModel.DUMP_CMD_HISTORY.defaultDiagnosticWakeRate);
     dataModel.enableAllInstrumentHKRates(wakeType);
 
-    spawn(new WakePeriod());
-    call(new BootInit());
+    spawn(mission, new WakePeriod());
+    call(mission, new BootInit());
 
     final var masterDuration = duration.minus(mission.config.masterActivityDurations().BOOT_INIT_DURATION());
     if (wakeType.equals(WakeType.DIAGNOSTIC)) {
-      call(new MasterDiagnostic(masterDuration, seqid));
+      call(mission, new MasterDiagnostic(masterDuration, seqid));
     } else {
-      call(new MasterFull(masterDuration, seqid, lmeCurveSelNeeded(start, end)));
+      call(mission, new MasterFull(masterDuration, seqid, lmeCurveSelNeeded(start, end)));
     }
 
     dataModel.disableAllInstrumentHKRates(wakeType);

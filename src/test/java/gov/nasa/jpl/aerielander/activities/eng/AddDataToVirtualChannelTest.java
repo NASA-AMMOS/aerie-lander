@@ -36,14 +36,14 @@ public class AddDataToVirtualChannelTest {
   public void testAddData() {
     {
       final var chan = DataConfig.ChannelName.VC01;
-      spawn(new AddDataToVirtualChannel(chan, 42.0));
+      spawn(mission, new AddDataToVirtualChannel(chan, 42.0));
       delay(Duration.of(1, MINUTES));
       assertThat(mission.dataModel.getChannel(chan).volume.get()).isEqualTo(42.0);
     }
 
     {
       final var chan = DataConfig.ChannelName.VC09;
-      spawn(new AddDataToVirtualChannel(chan, 13.0));
+      spawn(mission, new AddDataToVirtualChannel(chan, 13.0));
       delay(Duration.of(1, MINUTES));
       assertThat(mission.dataModel.getChannel(chan).volume.get()).isEqualTo(13.0);
     }

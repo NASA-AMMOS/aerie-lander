@@ -29,19 +29,19 @@ public class TetherStorageBoxHeatersTest {
 
   @Test
   public void testChassisToggle() {
-    spawn(new TetherStorageBoxChassisHeaterOn());
+    spawn(mission, new TetherStorageBoxChassisHeaterOn());
     // TODO assert mission.powerModel COVER PEL states were set
 
-    spawn(new TetherStorageBoxAllHeatersOff());
+    spawn(mission, new TetherStorageBoxAllHeatersOff());
     // TODO assert mission.powerModel COVER PEL states were set
   }
 
   @Test
   public void testCoverToggle() {
-    spawn(new TetherStorageBoxChassisHeaterOn());
+    spawn(mission, new TetherStorageBoxChassisHeaterOn());
     // TODO assert mission.powerModel COVER PEL states were set
 
-    spawn(new TetherStorageBoxAllHeatersOff());
+    spawn(mission, new TetherStorageBoxAllHeatersOff());
     // TODO assert mission.powerModel COVER PEL states were set
   }
 }

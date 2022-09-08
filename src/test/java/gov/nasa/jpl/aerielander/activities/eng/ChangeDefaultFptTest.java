@@ -35,7 +35,7 @@ public class ChangeDefaultFptTest {
   public void testChangeDefault() {
     assertThat(mission.dataModel.defaultFPT.get()).isEqualTo(DataConfig.FPT.DEFAULT);
 
-    spawn(new ChangeDefaultFpt(DataConfig.FPT.dwn_fpt_HeatProbe));
+    spawn(mission, new ChangeDefaultFpt(DataConfig.FPT.dwn_fpt_HeatProbe));
     delay(Duration.MINUTE);
     assertThat(mission.dataModel.defaultFPT.get()).isEqualTo(DataConfig.FPT.dwn_fpt_HeatProbe);
   }

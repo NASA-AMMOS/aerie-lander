@@ -29,7 +29,7 @@ public class APSSChangeAcqConfigTest {
 
   @Test
   public void testToggleComponents() {
-    spawn(new APSSChangeAcqConfig.Builder()
+    spawn(mission, new APSSChangeAcqConfig.Builder()
         .withTwinsPyOn(true)
         .withTwinsMyOn(true)
         .build());

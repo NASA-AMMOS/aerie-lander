@@ -49,24 +49,24 @@ public final class EnterSafeMode {
   private void enterSafeMode(final Mission mission) {
     switch (component) {
       case Lander -> {
-        spawn(makeApssAllOff());
-        spawn(new SeisPowerOff(duration));
-        spawn(new HeatProbeBeeOff(duration));
-        spawn(new ICCHeatersOff(duration));
-        spawn(new IDCHeatersOff(duration));
+        spawn(mission, makeApssAllOff());
+        spawn(mission, new SeisPowerOff(duration));
+        spawn(mission, new HeatProbeBeeOff(duration));
+        spawn(mission, new ICCHeatersOff(duration));
+        spawn(mission, new IDCHeatersOff(duration));
         // Go to only survival heater (disable nominals)
-        spawn(new ToggleTeHeaters.Builder()
+        spawn(mission, new ToggleTeHeaters.Builder()
             .withDuration(duration)
             .withNominalPrimaryDisabled(true)
             .withNominalSecondaryDisabled(true)
             .build());
       }
-      case APSS -> spawn(makeApssAllOff());
-      case SEIS -> spawn(new SeisPowerOff(duration));
-      case HeatProbe -> spawn(new HeatProbeBeeOff(duration));
+      case APSS -> spawn(mission, makeApssAllOff());
+      case SEIS -> spawn(mission, new SeisPowerOff(duration));
+      case HeatProbe -> spawn(mission, new HeatProbeBeeOff(duration));
       case IDS -> {
-        spawn(new ICCHeatersOff(duration));
-        spawn(new IDCHeatersOff(duration));
+        spawn(mission, new ICCHeatersOff(duration));
+        spawn(mission, new IDCHeatersOff(duration));
       }
     }
     mission.engModel.setSafeMode(component, true);
@@ -87,7 +87,7 @@ public final class EnterSafeMode {
   private void exitSafeMode(final Mission mission) {
     if (component == Component.Lander) {
       // Set heaters back to normal
-      spawn(new ToggleTeHeaters.Builder()
+      spawn(mission, new ToggleTeHeaters.Builder()
           .withDuration(duration)
           .withSurvivalPrimaryDisabled(true)
           .withSurvivalSecondaryDisabled(true)

@@ -35,7 +35,7 @@ public class ChangeDefaultDartTest {
   public void testChangeDefault() {
     assertThat(mission.dataModel.defaultDART.get()).isEqualTo(DataConfig.DART.DEFAULT);
 
-    spawn(new ChangeDefaultDart(DataConfig.DART.dwn_dart_deploy_apss_cont));
+    spawn(mission, new ChangeDefaultDart(DataConfig.DART.dwn_dart_deploy_apss_cont));
     delay(Duration.MINUTE);
     assertThat(mission.dataModel.defaultDART.get()).isEqualTo(DataConfig.DART.dwn_dart_deploy_apss_cont);
   }

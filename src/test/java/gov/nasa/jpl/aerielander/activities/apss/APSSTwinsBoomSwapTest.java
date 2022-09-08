@@ -38,7 +38,7 @@ public class APSSTwinsBoomSwapTest {
     final var twinsMyOn = mission.apssModel.getComponentState(APSSModel.Component.TWINS_MY);
     final var twinsPyOn = mission.apssModel.getComponentState(APSSModel.Component.TWINS_PY);
 
-    spawn(new APSSTwinsBoomSwap());
+    spawn(mission, new APSSTwinsBoomSwap());
     delay(Duration.of(20, MINUTES));
 
     assertThat(twinsMyOn.get()).isEqualTo(false);
@@ -46,7 +46,7 @@ public class APSSTwinsBoomSwapTest {
 
     model.setComponentState(APSSModel.Component.TWINS_MY, true);
     model.setComponentState(APSSModel.Component.TWINS_PY, true);
-    spawn(new APSSTwinsBoomSwap());
+    spawn(mission, new APSSTwinsBoomSwap());
     delay(Duration.of(20, MINUTES));
 
     assertThat(twinsMyOn.get()).isEqualTo(false);
@@ -54,7 +54,7 @@ public class APSSTwinsBoomSwapTest {
 
     model.setComponentState(APSSModel.Component.TWINS_MY, false);
     model.setComponentState(APSSModel.Component.TWINS_PY, true);
-    spawn(new APSSTwinsBoomSwap());
+    spawn(mission, new APSSTwinsBoomSwap());
     delay(Duration.of(20, MINUTES));
 
     assertThat(twinsMyOn.get()).isEqualTo(true);

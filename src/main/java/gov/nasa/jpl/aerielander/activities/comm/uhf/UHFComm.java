@@ -122,13 +122,13 @@ public final class UHFComm {
                               iv_sci_dur_2.dividedBy(hailDuration);
 
     delay(mission.clocks.timeUntil(uhf_prep_start));
-    spawn(new UHF(total_uhf_dur, overflightID, info_Mbits));
+    spawn(mission, new UHF(total_uhf_dur, overflightID, info_Mbits));
     // UHF_SATF is for sequence generation, so we won't translate that
     //spawn(new UHFSatf(total_uhf_dur, overflightID, commParameters.UHF_RT_DUR_1(), iv_sci_dur_2, commParameters.UHF_RT_3_DUR(), iv_encoding, iv_diag_data));
-    spawn(new UHFPrep(uhf_prep_dur, iv_diag_data));
+    spawn(mission, new UHFPrep(uhf_prep_dur, iv_diag_data));
 
     delay(mission.clocks.timeUntil(uhf_active_start));
-    spawn(new UHFActive(overflightID, info_Mbits, iv_sci_dur_2));
+    spawn(mission, new UHFActive(overflightID, info_Mbits, iv_sci_dur_2));
   }
 
   private Time getUhfBlockStart(final Time requestStart, final CommParameters commParameters) {

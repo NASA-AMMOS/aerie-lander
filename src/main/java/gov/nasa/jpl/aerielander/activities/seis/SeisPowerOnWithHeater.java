@@ -33,12 +33,12 @@ public final class SeisPowerOnWithHeater {
   public void run(final Mission mission) {
     final var end = mission.clocks.getCurrentTime().plus(duration);
 
-    spawn(new SeisPowerSensorInfrastructure(duration,
+    spawn(mission, new SeisPowerSensorInfrastructure(duration,
                                             true,
                                             vbbOn ? VBBState.allOn() : VBBState.allOff(),
                                             spOn ? SPState.allOn() : SPState.allOff(),
                                             scitOn));
-    spawn(new SeisPowerHeatersInfrastructure(true));
+    spawn(mission, new SeisPowerHeatersInfrastructure(true));
 
     final var seisHk = mission.dataModel.hkModel.SEIS;
     final var seisNonChanHk = mission.dataModel.hkModel.SEIS_NON_CHAN;

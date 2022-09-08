@@ -35,12 +35,12 @@ public class SafeModeTest {
   public void testToggleSafeMode() {
     final var safeModes = mission.engModel.safeModeMap;
 
-    spawn(new EnterSafeMode(Duration.MINUTE, EngModel.Component.APSS));
+    spawn(mission, new EnterSafeMode(Duration.MINUTE, EngModel.Component.APSS));
 
     delay(Duration.MINUTE);
     assertThat(safeModes.get(EngModel.Component.APSS).get()).isEqualTo(true);
 
-    spawn(new ExitSafeMode(Duration.MINUTE, EngModel.Component.APSS));
+    spawn(mission, new ExitSafeMode(Duration.MINUTE, EngModel.Component.APSS));
 
     delay(Duration.MINUTE);
     assertThat(safeModes.get(EngModel.Component.APSS).get()).isEqualTo(false);

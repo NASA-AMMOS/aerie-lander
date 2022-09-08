@@ -46,8 +46,8 @@ public final class XBandComm {
 
     // XBAND_SATF is for sequence generation, so we won't translate that
     //spawn(new XBandSATF(name, xbandTxDuration, initialRtOnlyDuration, delayToTxOn, xbandAntSel, dlRate, ulRate));
-    spawn(new XBandPrep(prepDuration));
-    defer(delayToTxOn, new XBandActive(xbandTxDuration));
-    defer(clock.timeUntil(cleanupStart), new XBandCleanup(commParameters.XBAND_CLEANUP_DURATION()));
+    spawn(mission, new XBandPrep(prepDuration));
+    defer(delayToTxOn, mission, new XBandActive(xbandTxDuration));
+    defer(clock.timeUntil(cleanupStart), mission, new XBandCleanup(commParameters.XBAND_CLEANUP_DURATION()));
   }
 }

@@ -34,7 +34,7 @@ public class EngGenericTest {
 
   @Test
   public void testEngGeneric() {
-    spawn(new EngGeneric(1.0, 1.0));
+    spawn(mission, new EngGeneric(1.0, 1.0));
     final var vc = mission.dataModel.getApidModel(APID.SPACECRAFT).get().getRoutedVirtualChannel();
 
     delay(Duration.of(1, SECONDS));

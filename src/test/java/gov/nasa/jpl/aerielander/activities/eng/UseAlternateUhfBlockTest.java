@@ -38,11 +38,11 @@ public class UseAlternateUhfBlockTest {
 
     assertThat(inUse.get(CommModel.Orbiter.ODY).get()).isEqualTo(false);
 
-    spawn(new UseAlternateUhfBlock(CommModel.Orbiter.MRO, true));
+    spawn(mission, new UseAlternateUhfBlock(CommModel.Orbiter.MRO, true));
     delay(Duration.of(2, MINUTES));
     assertThat(inUse.get(CommModel.Orbiter.MRO).get()).isEqualTo(true);
 
-    spawn(new UseAlternateUhfBlock(CommModel.Orbiter.MRO, false));
+    spawn(mission, new UseAlternateUhfBlock(CommModel.Orbiter.MRO, false));
     delay(Duration.of(2, MINUTES));
     assertThat(inUse.get(CommModel.Orbiter.MRO).get()).isEqualTo(false);
   }

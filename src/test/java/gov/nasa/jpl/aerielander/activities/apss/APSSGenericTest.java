@@ -35,7 +35,7 @@ public class APSSGenericTest {
 
   @Test
   public void testApssGeneric() {
-    spawn(new APSSGeneric(23.0, 42.0, 1.0, 2.0));
+    spawn(mission, new APSSGeneric(23.0, 42.0, 1.0, 2.0));
 
     delay(Duration.of(1, MINUTES));
     assertThat(mission.powerModel.getGenericPowerUsed()).isEqualTo(25.714285714285715);

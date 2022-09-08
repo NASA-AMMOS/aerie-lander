@@ -28,8 +28,8 @@ public final class SeisPowerOff {
   public void run(final Mission mission) {
     final var end = mission.clocks.getCurrentTime().plus(duration);
 
-    spawn(new SeisPowerSensorInfrastructure(duration, false, VBBState.allOff(), SPState.allOff(), false));
-    spawn(new SeisPowerHeatersInfrastructure(false));
+    spawn(mission, new SeisPowerSensorInfrastructure(duration, false, VBBState.allOff(), SPState.allOff(), false));
+    spawn(mission, new SeisPowerHeatersInfrastructure(false));
 
     final var seisHk = mission.dataModel.hkModel.SEIS;
     final var seisNonChanHk = mission.dataModel.hkModel.SEIS_NON_CHAN;

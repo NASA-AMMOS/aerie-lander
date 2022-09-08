@@ -28,16 +28,16 @@ public final class MasterDiagnostic {
   public void run(final Mission mission) {
     final var submaster_seqid = "ns" + seqid.substring(2, 6) + "_" + seqid.substring(7, 9);
 
-    call(new LoadBlockLib());
+    call(mission, new LoadBlockLib());
 
-    call(new Wakeup());
+    call(mission, new Wakeup());
 
-    call(new FileMgmt());
+    call(mission, new FileMgmt());
 
-    call(new Submaster(mission.config.masterActivityDurations().SUBMASTER_DIAG_DURATION(), submaster_seqid));
+    call(mission, new Submaster(mission.config.masterActivityDurations().SUBMASTER_DIAG_DURATION(), submaster_seqid));
 
-    call(new FileCopy());
+    call(mission, new FileCopy());
 
-    call(new Shutdown());
+    call(mission, new Shutdown());
   }
 }

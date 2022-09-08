@@ -36,9 +36,9 @@ public final class GetData {
         apssTimeout.longerThan(Duration.ZERO) ||
         eventDuration.longerThan(Duration.ZERO)
     ) {
-      spawn(new PayGetData(seisTimeout, apssTimeout, eventDuration));
+      spawn(model, new PayGetData(seisTimeout, apssTimeout, eventDuration));
     }
 
-    defer(HeatProbeOffset, new HeatProbeGetSciData(HeatProbeTimeout));
+    defer(HeatProbeOffset, model, new HeatProbeGetSciData(HeatProbeTimeout));
   }
 }

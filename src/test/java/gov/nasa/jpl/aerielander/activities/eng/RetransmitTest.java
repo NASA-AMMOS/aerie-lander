@@ -34,7 +34,7 @@ public class RetransmitTest {
 
   @Test
   public void testRetransmit() {
-    spawn(new Retransmit(10.0));
+    spawn(mission, new Retransmit(10.0));
     final var vc = mission.dataModel.getChannel(RETX);
 
     delay(Duration.of(1, SECONDS));

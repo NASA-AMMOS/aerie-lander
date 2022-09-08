@@ -29,6 +29,6 @@ public final class SeisPowerOffSensor {
 
   @EffectModel
   public void run(final Mission mission) {
-    call(new SeisPowerSensorInfrastructure(duration, true, vbbState, spState, scitOn));
+    call(mission, new SeisPowerSensorInfrastructure(duration, true, vbbState, spState, scitOn));
   }
 }
