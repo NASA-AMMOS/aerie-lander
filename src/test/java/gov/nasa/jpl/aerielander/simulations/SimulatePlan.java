@@ -10,8 +10,7 @@ import gov.nasa.jpl.aerie.merlin.framework.RootModel;
 import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
-import gov.nasa.jpl.aerielander.generated.ActivityTypes;
-import gov.nasa.jpl.aerielander.generated.GeneratedMissionModelFactory;
+import gov.nasa.jpl.aerielander.generated.GeneratedModelType;
 import gov.nasa.jpl.aerielander.parsers.ActivityInstance;
 import gov.nasa.jpl.aerielander.parsers.MerlinParsers;
 import gov.nasa.jpl.aerielander.parsers.NewPlan;
@@ -30,9 +29,9 @@ public final class SimulatePlan {
   }
 
   private static MissionModel<RootModel<Mission>> makeMissionModel(final MissionModelBuilder builder, final Configuration config) {
-    final var factory = new GeneratedMissionModelFactory();
-    final var registry = DirectiveTypeRegistry.extract(factory);
-    final var model = factory.instantiate(Instant.EPOCH, config, builder);
+    final var modelType = new GeneratedModelType();
+    final var registry = DirectiveTypeRegistry.extract(modelType);
+    final var model = modelType.instantiate(Instant.EPOCH, config, builder);
     return builder.build(model, registry);
   }
 
