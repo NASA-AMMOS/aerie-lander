@@ -48,16 +48,19 @@ public final class ICCImages {
   public int compQuality = 95;
 
   @Validation("nFrames must be between 0 and 99")
+  @Validation.Subject("nFrames")
   public boolean validateNumberOfFrames() {
     return nFrames >= 0 && nFrames <= 99;
   }
 
   @Validation("apid must be an IDC APID")
+  @Validation.Subject("apid")
   public boolean validateAPID() {
     return validAPIDs.contains(apid);
   }
 
   @Validation("compQuality must be between 0 and 99")
+  @Validation.Subject("compQuality")
   public boolean validateCompQuality() {
     return compQuality >= 0 && compQuality <= 99;
   }

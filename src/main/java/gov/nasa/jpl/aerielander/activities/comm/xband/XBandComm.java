@@ -26,6 +26,7 @@ public final class XBandComm {
   @Parameter public String DSNTrack = "DSS-25";
 
   @Validation("XBandComm xbandTxDuration cannot be less than 20 minutes or greater than 2 hours.")
+  @Validation.Subject("xbandTxDuration")
   public boolean validateXbandTxDuration() {
     return xbandTxDuration.noShorterThan(Duration.of(20, MINUTES)) &&
            xbandTxDuration.noLongerThan(Duration.of(120, MINUTES));

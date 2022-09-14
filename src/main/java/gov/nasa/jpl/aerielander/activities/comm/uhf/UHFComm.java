@@ -59,26 +59,31 @@ public final class UHFComm {
   public IV_DIAG_DATA iv_diag_data =  IV_DIAG_DATA.NO_DIAG_DATA;
 
   @Validation("LNUT must be after Mars Origin")
+  @Validation.Subject("LNUT")
   public boolean validateLNUT() {
     return LNUT.isAfter(Time.Mars_Time_Origin);
   }
 
   @Validation("FirstBitTime must be after Mars Origin")
+  @Validation.Subject("firstBitTime")
   public boolean validateFirstBitTime() {
     return firstBitTime.isAfter(Time.Mars_Time_Origin);
   }
 
   @Validation("LastBitTime must be after Mars Origin")
+  @Validation.Subject("lastBitTime")
   public boolean validateLastBitTime() {
     return lastBitTime.isAfter(Time.Mars_Time_Origin);
   }
 
   @Validation("ForwardRate must be positive")
+  @Validation.Subject("forwardRate")
   public boolean validateForwardRate() {
     return forwardRate > 0;
   }
 
   @Validation("ReturnRate must be positive")
+  @Validation.Subject("returnRate")
   public boolean validateReturnRate() {
     return returnRate > 0;
   }

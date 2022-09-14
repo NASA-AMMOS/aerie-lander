@@ -61,11 +61,13 @@ public final class APSSChangeAcqConfig {
   public int twinsMySetpoint = DEFAULT_TWINS_MY_SETPOINT;
 
   @Validation("TWINS PY heater setpoint must be within interval [-90, 50] (degrees C)")
+  @Validation.Subject("twinsPySetpoint")
   public boolean validateTwinsPySetpoint() {
     return twinsPySetpoint >= -90 && twinsPySetpoint <= 50;
   }
 
   @Validation("TWINS MY heater setpoint must be within interval [-75, 50] (degrees C)")
+  @Validation.Subject("twinsMySetpoint")
   public boolean validateTwinsMySetpoint() {
     return twinsMySetpoint >= -75 && twinsMySetpoint <= 50;
   }
