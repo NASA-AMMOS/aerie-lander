@@ -38,26 +38,31 @@ public final class SeisChangeAcqRate {
   public Double scitRate = 0.0; // Hz
 
   @Validation("VEL rate must be either 0, 20 or 100 Hz")
+  @Validation.Subject("velRate")
   public boolean validateVelRate() {
     return Set.of(0.0, 20.0, 100.0).contains(velRate);
   }
 
   @Validation("POS rate must be either 0, 0.1 or 1 Hz")
+  @Validation.Subject("posRate")
   public boolean validatePosRate() {
     return Set.of(0.0, 0.1, 1.0).contains(posRate);
   }
 
   @Validation("TEMP rate must be either 0, 0.1 or 1 Hz")
+  @Validation.Subject("tempRate")
   public boolean validateTempRate() {
     return Set.of(0.0, 0.1, 1.0).contains(tempRate);
   }
 
   @Validation("SP rate must be either 0, 20 or 100 Hz")
+  @Validation.Subject("spRate")
   public boolean validateSpRate() {
     return Set.of(0.0, 20.0, 100.0).contains(spRate);
   }
 
   @Validation("SCIT rate must be either 0, 0.1 or 1 Hz")
+  @Validation.Subject("scitRate")
   public boolean validateScitRate() {
     return Set.of(0.0, 0.1, 1.0).contains(scitRate);
   }
