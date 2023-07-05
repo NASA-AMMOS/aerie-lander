@@ -17,6 +17,6 @@ public final class IDCConditionalImage {
 
   @EffectModel
   public void run(final Mission mission) {
-    call(new IDCImages(duration, 0, APID_IDC_1, 95));
+    call(mission, new IDCImages(duration, 0, APID_IDC_1, 95));
   }
 }

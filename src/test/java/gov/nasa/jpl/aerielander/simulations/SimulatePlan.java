@@ -1,21 +1,13 @@
 package gov.nasa.jpl.aerielander.simulations;
 
-import gov.nasa.jpl.aerie.merlin.driver.ActivityInstanceId;
-import gov.nasa.jpl.aerie.merlin.driver.DirectiveTypeRegistry;
-import gov.nasa.jpl.aerie.merlin.driver.MissionModel;
-import gov.nasa.jpl.aerie.merlin.driver.MissionModelBuilder;
-import gov.nasa.jpl.aerie.merlin.driver.SerializedActivity;
-import gov.nasa.jpl.aerie.merlin.driver.SimulationDriver;
-import gov.nasa.jpl.aerie.merlin.framework.RootModel;
+import gov.nasa.jpl.aerie.merlin.driver.*;
 import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
-import gov.nasa.jpl.aerielander.generated.ActivityTypes;
-import gov.nasa.jpl.aerielander.generated.GeneratedMissionModelFactory;
+import gov.nasa.jpl.aerielander.generated.GeneratedModelType;
 import gov.nasa.jpl.aerielander.parsers.ActivityInstance;
 import gov.nasa.jpl.aerielander.parsers.MerlinParsers;
 import gov.nasa.jpl.aerielander.parsers.NewPlan;
-import org.apache.commons.lang3.tuple.Pair;
 
 import javax.json.Json;
 import javax.json.JsonValue;
@@ -29,11 +21,11 @@ public final class SimulatePlan {
     simulatePlan(new MissionModelBuilder(), "merlin-test-filtered.json", 1);
   }
 
-  private static MissionModel<RootModel<ActivityTypes, Mission>> makeMissionModel(final MissionModelBuilder builder, final Configuration config) {
-    final var factory = new GeneratedMissionModelFactory();
+  private static MissionModel<Mission> makeMissionModel(final MissionModelBuilder builder, final Configuration config) {
+    final var factory = new GeneratedModelType();
     final var registry = DirectiveTypeRegistry.extract(factory);
-    final var model = factory.instantiate(registry.registry(), Instant.EPOCH, config, builder);
-    return builder.build(model, factory.getConfigurationType(), registry);
+    final var model = factory.instantiate(Instant.EPOCH, config, builder);
+    return builder.build(model, registry);
   }
 
   public static void simulatePlan(final MissionModelBuilder builder, final String planName, final int numberSims) {
@@ -41,67 +33,65 @@ public final class SimulatePlan {
     final var configuration = Configuration.defaultConfiguration();
     final var missionModel = makeMissionModel(builder, configuration);
 
-    try {
-      final var planJson = readPlan(planName);
-      final var plan = MerlinParsers.newPlanP.parse(planJson).getSuccessOrThrow();
-      final var schedule = buildScheduleFromPlan(plan);
 
-      final var startTime = plan.startTimestamp.toInstant();
-      final var endTime = plan.endTimestamp.toInstant();
-      final var simulationDuration = durationBetween(startTime, endTime);
+    final var planJson = readPlan(planName);
+    final var plan = MerlinParsers.newPlanP.parse(planJson).getSuccessOrThrow();
+    final var schedule = buildScheduleFromPlan(plan);
 
-      final var buildEnd = java.time.Instant.now();
-      final var prepTime = java.time.Duration.between(buildStart, buildEnd);
-      System.out.println("Parse and Build time: " + prepTime);
+    final var startTime = plan.startTimestamp.toInstant();
+    final var endTime = plan.endTimestamp.toInstant();
+    final var simulationDuration = durationBetween(startTime, endTime);
 
-      // Warmup
-      for (int i = 0; i < 5; i++) {
-        final var simulationStart = java.time.Instant.now();
-        SimulationDriver.simulate(missionModel, schedule, startTime, simulationDuration);
-        final var simulationEnd = java.time.Instant.now();
+    final var buildEnd = java.time.Instant.now();
+    final var prepTime = java.time.Duration.between(buildStart, buildEnd);
+    System.out.println("Parse and Build time: " + prepTime);
 
-        final var singleSimulationTime = java.time.Duration.between(simulationStart, simulationEnd);
-        System.out.println("Warmup %s: %s".formatted(i, singleSimulationTime));
-      }
+    // Warmup
+    for (int i = 0; i < 5; i++) {
+      final var simulationStart = java.time.Instant.now();
+      SimulationDriver.simulate(missionModel, schedule, startTime, simulationDuration, startTime, simulationDuration);
+      final var simulationEnd = java.time.Instant.now();
 
-      var totalSimulationTime = java.time.Duration.ZERO;
-      for (int i = 0; i < numberSims; i++) {
-        final var simulationStart = java.time.Instant.now();
-        final var simulate = SimulationDriver.simulate(
-            missionModel,
-            schedule,
-            startTime,
-            simulationDuration);
-        final var simulationEnd = java.time.Instant.now();
-
-        final var singleSimulationTime = java.time.Duration.between(simulationStart, simulationEnd);
-        totalSimulationTime = totalSimulationTime.plus(singleSimulationTime);
-
-        System.out.println("Simulation %s: %s".formatted(i, singleSimulationTime));
-      }
-
-      final var totalTime = prepTime.plus(totalSimulationTime);
-
-      System.out.println("Average simulation time: " + totalSimulationTime.dividedBy(numberSims));
-      System.out.println("Total time: " + totalTime);
-    } finally {
-      missionModel.getModel().close();
+      final var singleSimulationTime = java.time.Duration.between(simulationStart, simulationEnd);
+      System.out.println("Warmup %s: %s".formatted(i, singleSimulationTime));
     }
+
+    var totalSimulationTime = java.time.Duration.ZERO;
+    for (int i = 0; i < numberSims; i++) {
+      final var simulationStart = java.time.Instant.now();
+      final var simulate = SimulationDriver.simulate(
+          missionModel,
+          schedule,
+          startTime,
+          simulationDuration,
+          startTime,
+          simulationDuration);
+      final var simulationEnd = java.time.Instant.now();
+
+      final var singleSimulationTime = java.time.Duration.between(simulationStart, simulationEnd);
+      totalSimulationTime = totalSimulationTime.plus(singleSimulationTime);
+
+      System.out.println("Simulation %s: %s".formatted(i, singleSimulationTime));
+    }
+
+    final var totalTime = prepTime.plus(totalSimulationTime);
+
+    System.out.println("Average simulation time: " + totalSimulationTime.dividedBy(numberSims));
+    System.out.println("Total time: " + totalTime);
   }
 
-  public static Map<ActivityInstanceId, Pair<Duration, SerializedActivity>> buildScheduleFromPlan(final NewPlan plan) {
+  public static Map<ActivityDirectiveId, ActivityDirective> buildScheduleFromPlan(final NewPlan plan) {
     final var startTime = plan.startTimestamp.toInstant();
-    final var schedule = new HashMap<ActivityInstanceId, Pair<Duration, SerializedActivity>>();
+    final var schedule = new HashMap<ActivityDirectiveId, ActivityDirective>();
     long counter = 0;
 
     for (final var instance : plan.activityInstances) {
       schedule.put(
-              new ActivityInstanceId(counter++),
-              Pair.of(Duration.of(startTime.until(
-                                      instance.startTimestamp.toInstant(),
-                                      ChronoUnit.MICROS),
-                              Duration.MICROSECONDS),
-                      new SerializedActivity(instance.type, instance.parameters)));
+              new ActivityDirectiveId(counter++),
+              new ActivityDirective(Duration.of(startTime.until(
+                              instance.startTimestamp.toInstant(),
+                              ChronoUnit.MICROS),
+                      Duration.MICROSECONDS), new SerializedActivity(instance.type, instance.parameters), null, true));
     }
 
     return schedule;

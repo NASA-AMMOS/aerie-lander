@@ -31,14 +31,14 @@ public final class GetData {
   public Duration HeatProbeOffset = Duration.of(10, SECONDS);
 
   @EffectModel
-  public void run(final Mission model) {
+  public void run(final Mission mission) {
     if (seisTimeout.longerThan(Duration.ZERO) ||
         apssTimeout.longerThan(Duration.ZERO) ||
         eventDuration.longerThan(Duration.ZERO)
     ) {
-      spawn(new PayGetData(seisTimeout, apssTimeout, eventDuration));
+      spawn(mission, new PayGetData(seisTimeout, apssTimeout, eventDuration));
     }
 
-    defer(HeatProbeOffset, new HeatProbeGetSciData(HeatProbeTimeout));
+    defer(HeatProbeOffset, mission, new HeatProbeGetSciData(HeatProbeTimeout));
   }
 }

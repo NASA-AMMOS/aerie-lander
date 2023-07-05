@@ -1,7 +1,8 @@
 package gov.nasa.jpl.aerielander.activities.apss;
 
+import gov.nasa.jpl.aerie.merlin.framework.Registrar;
 import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinExtension;
-import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinTestContext;
+
 import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
@@ -9,7 +10,8 @@ import gov.nasa.jpl.aerielander.generated.ActivityTypes;
 import gov.nasa.jpl.aerielander.models.apss.APSSModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 
 import java.time.Instant;
 
@@ -18,17 +20,14 @@ import static gov.nasa.jpl.aerie.merlin.protocol.types.Duration.MINUTES;
 import static gov.nasa.jpl.aerielander.generated.ActivityActions.spawn;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MerlinExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class APSSTwinsBoomSwapTest {
 
-  @RegisterExtension
-  public static final MerlinExtension<ActivityTypes, Mission> ext = new MerlinExtension<>();
-
   private final Mission mission;
 
-  public APSSTwinsBoomSwapTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
-    this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
-    ctx.use(mission, ActivityTypes::register);
+  public APSSTwinsBoomSwapTest(final Registrar registrar) {
+    this.mission = new Mission(registrar, Instant.EPOCH, Configuration.defaultConfiguration());
   }
 
   @Test
@@ -37,7 +36,7 @@ public class APSSTwinsBoomSwapTest {
     final var twinsMyOn = mission.apssModel.getComponentState(APSSModel.Component.TWINS_MY);
     final var twinsPyOn = mission.apssModel.getComponentState(APSSModel.Component.TWINS_PY);
 
-    spawn(new APSSTwinsBoomSwap());
+    spawn(this.mission, new APSSTwinsBoomSwap());
     delay(Duration.of(20, MINUTES));
 
     assertThat(twinsMyOn.get()).isEqualTo(false);
@@ -45,7 +44,7 @@ public class APSSTwinsBoomSwapTest {
 
     model.setComponentState(APSSModel.Component.TWINS_MY, true);
     model.setComponentState(APSSModel.Component.TWINS_PY, true);
-    spawn(new APSSTwinsBoomSwap());
+    spawn(this.mission, new APSSTwinsBoomSwap());
     delay(Duration.of(20, MINUTES));
 
     assertThat(twinsMyOn.get()).isEqualTo(false);
@@ -53,7 +52,7 @@ public class APSSTwinsBoomSwapTest {
 
     model.setComponentState(APSSModel.Component.TWINS_MY, false);
     model.setComponentState(APSSModel.Component.TWINS_PY, true);
-    spawn(new APSSTwinsBoomSwap());
+    spawn(this.mission, new APSSTwinsBoomSwap());
     delay(Duration.of(20, MINUTES));
 
     assertThat(twinsMyOn.get()).isEqualTo(true);

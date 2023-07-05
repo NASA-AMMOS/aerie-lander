@@ -32,8 +32,8 @@ public final class PayGetData {
 
   @EffectModel
   public void run(final Mission mission) {
-    if (seisTimeout.isPositive()) call(new SeisProcessContinuousData(seisTimeout));
-    if (apssTimeout.isPositive()) call(new APSSProcessContinuousData(apssTimeout));
+    if (seisTimeout.isPositive()) call(mission, new SeisProcessContinuousData(seisTimeout));
+    if (apssTimeout.isPositive()) call(mission, new APSSProcessContinuousData(apssTimeout));
 
     // The apgen model really doesn't use eventDuration
   }

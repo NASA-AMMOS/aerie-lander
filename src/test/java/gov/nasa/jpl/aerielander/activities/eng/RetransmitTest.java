@@ -1,14 +1,16 @@
 package gov.nasa.jpl.aerielander.activities.eng;
 
+import gov.nasa.jpl.aerie.merlin.framework.Registrar;
 import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinExtension;
-import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinTestContext;
+
 import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.Mission;
 import gov.nasa.jpl.aerielander.config.Configuration;
 import gov.nasa.jpl.aerielander.generated.ActivityTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 
 import java.time.Instant;
 
@@ -18,22 +20,19 @@ import static gov.nasa.jpl.aerielander.generated.ActivityActions.spawn;
 import static gov.nasa.jpl.aerielander.models.data.DataConfig.ChannelName.RETX;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MerlinExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RetransmitTest {
 
-  @RegisterExtension
-  public static final MerlinExtension<ActivityTypes, Mission> ext = new MerlinExtension<>();
-
   private final Mission mission;
 
-  public RetransmitTest(final MerlinTestContext<ActivityTypes, Mission> ctx) {
-    this.mission = new Mission(ctx.registrar(), Instant.EPOCH, Configuration.defaultConfiguration());
-    ctx.use(mission, ActivityTypes::register);
+  public RetransmitTest(final Registrar registrar) {
+    this.mission = new Mission(registrar, Instant.EPOCH, Configuration.defaultConfiguration());
   }
 
   @Test
   public void testRetransmit() {
-    spawn(new Retransmit(10.0));
+    spawn(this.mission, new Retransmit(10.0));
     final var vc = mission.dataModel.getChannel(RETX);
 
     delay(Duration.of(1, SECONDS));

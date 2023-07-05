@@ -44,7 +44,7 @@ public final class ExitSafeMode {
   private void exitSafeMode(final Mission mission) {
     if (component == Component.Lander) {
       // Set heaters back to normal
-      spawn(new ToggleTeHeaters.Builder()
+      spawn(mission, new ToggleTeHeaters.Builder()
                 .withDuration(duration)
                 .withSurvivalPrimaryDisabled(true)
                 .withSurvivalSecondaryDisabled(true)
