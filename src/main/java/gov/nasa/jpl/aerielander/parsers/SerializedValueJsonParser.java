@@ -11,6 +11,7 @@ import javax.json.JsonNumber;
 import javax.json.JsonObject;
 import javax.json.JsonString;
 import javax.json.JsonValue;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,12 +71,7 @@ public final class SerializedValueJsonParser implements JsonParser<SerializedVal
             }
 
             @Override
-            public JsonValue onReal(final double value) {
-                return Json.createValue(value);
-            }
-
-            @Override
-            public JsonValue onInt(final long value) {
+            public JsonValue onNumeric(final BigDecimal value) {
                 return Json.createValue(value);
             }
 

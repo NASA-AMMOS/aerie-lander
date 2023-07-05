@@ -4,7 +4,7 @@ plugins {
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(18)
+    languageVersion = JavaLanguageVersion.of(19)
   }
 }
 
@@ -17,30 +17,25 @@ test {
   useJUnitPlatform()
 }
 
+// The runtime environment this JAR will be deployed to doesn't know what this model depends on.
+// So the generated JAR must include its dependencies. (Except `merlin-sdk`, which is marked `compileTimeApi` by
+// `merlin-framework`, so that the runtime system and model JAR can agree on the same interfaces.)
+jar {
+  from {
+    configurations.runtimeClasspath.filter{ it.exists() }.collect{ it.isDirectory() ? it : zipTree(it) }
+  } {
+    exclude 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt'
+  }
+}
+
 dependencies {
-  if (useLocalAerie == "true") {
-    compileOnly project(':contrib')
-    compileOnly project(':merlin-framework')
-    implementation project(':parsing-utilities')
-    annotationProcessor project(':merlin-framework-processor')
-
-    testImplementation project(':contrib')
-    testImplementation project(':merlin-framework')
-    testImplementation project(':merlin-sdk')
-    testImplementation project(':merlin-driver')
-    testImplementation project(':merlin-framework-junit')
-  }
-  else {
-    compileOnly 'gov.nasa.jpl.aerie:contrib:0.13.0-SNAPSHOT-+'
-    compileOnly 'gov.nasa.jpl.aerie:merlin-framework:0.13.0-SNAPSHOT-+'
-    implementation 'gov.nasa.jpl.aerie:parsing-utilities:0.13.0-SNAPSHOT-+'
-    annotationProcessor 'gov.nasa.jpl.aerie:merlin-framework-processor:0.13.0-SNAPSHOT-+'
-
-    testImplementation 'gov.nasa.jpl.aerie:contrib:0.13.0-SNAPSHOT-+'
-    testImplementation 'gov.nasa.jpl.aerie:merlin-driver:0.13.0-SNAPSHOT-+'
-    testImplementation 'gov.nasa.jpl.aerie:merlin-framework-junit:0.13.0-SNAPSHOT-+'
-  }
-
+  annotationProcessor 'gov.nasa.jpl.aerie:merlin-framework-processor:+'
+  implementation 'gov.nasa.jpl.aerie:contrib:+'
+  implementation 'gov.nasa.jpl.aerie:merlin-framework:+'
+  implementation 'gov.nasa.jpl.aerie:merlin-sdk:+'
+  implementation 'gov.nasa.jpl.aerie:parsing-utilities:+'
+  testImplementation 'gov.nasa.jpl.aerie:merlin-framework-junit:+'
+  testImplementation 'org.junit.jupiter:junit-jupiter:+'
   testImplementation 'org.assertj:assertj-core:3.22.0'
   testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'

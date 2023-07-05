@@ -35,7 +35,7 @@ public final class SeisPowerOn {
     mission.dataModel.setInstrumentHKRate(WakeModel.WakeType.FULL, seisHk, seisHk.defaultFullWakeRate, seisHk.defaultDiagnosticWakeRate);
     mission.dataModel.setInstrumentHKRate(WakeModel.WakeType.FULL, seisNonChanHk, seisNonChanHk.defaultFullWakeRate, seisNonChanHk.defaultDiagnosticWakeRate);
 
-    call(new SeisPowerSensorInfrastructure(
+    call(mission, new SeisPowerSensorInfrastructure(
         duration,
         true,
         vbbOn ? VBBState.allOn() : VBBState.allOff(),

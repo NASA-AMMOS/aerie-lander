@@ -36,8 +36,8 @@ public final class IDAMovementPeriod {
     final var hkModel = dataModel.hkModel;
 
     // Spawn children if necessary
-    if (moveDuration.longerThan(Duration.ZERO)) spawn(new IDAMoveArm(moveDuration));
-    if (grappleDuration.longerThan(Duration.ZERO)) defer(moveDuration, new IDAGrapple(grappleDuration));
+    if (moveDuration.longerThan(Duration.ZERO)) spawn(mission, new IDAMoveArm(moveDuration));
+    if (grappleDuration.longerThan(Duration.ZERO)) defer(moveDuration, mission, new IDAGrapple(grappleDuration));
 
     // No scheduling logic for now
     //if (move_duration > 00:00:00) {

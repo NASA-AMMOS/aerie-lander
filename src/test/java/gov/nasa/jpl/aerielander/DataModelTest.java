@@ -1,7 +1,8 @@
 package gov.nasa.jpl.aerielander;
 
+import gov.nasa.jpl.aerie.merlin.framework.Registrar;
 import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinExtension;
-import gov.nasa.jpl.aerie.merlin.framework.junit.MerlinTestContext;
+
 import gov.nasa.jpl.aerie.merlin.protocol.types.Duration;
 import gov.nasa.jpl.aerielander.activities.comm.uhf.UHFActive;
 import gov.nasa.jpl.aerielander.config.CommParameters;
@@ -18,7 +19,8 @@ import gov.nasa.jpl.aerielander.models.data.DataModel;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -33,22 +35,20 @@ import static gov.nasa.jpl.aerielander.models.data.DataConfig.ChannelName.VC02;
 import static gov.nasa.jpl.aerielander.models.data.DataConfig.ChannelName.VC06;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MerlinExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public final class DataModelTest {
 
+  @ExtendWith(MerlinExtension.class)
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   public @Nested final class DefaultConfigurationTests {
-
-    @RegisterExtension
-    public static final MerlinExtension<ActivityTypes, Mission> ext = new MerlinExtension<>();
 
     private final Mission mission;
     private final DataModel dataModel;
 
-    public DefaultConfigurationTests(final MerlinTestContext<ActivityTypes, Mission> ctx) {
+    public DefaultConfigurationTests(final Registrar registrar) {
       final var config = Configuration.defaultConfiguration();
-      mission = new Mission(ctx.registrar(), Instant.EPOCH, config);
-      ctx.use(mission, ActivityTypes::register);
+      mission = new Mission(registrar, Instant.EPOCH, config);
       dataModel = mission.dataModel;
     }
 
@@ -135,7 +135,7 @@ public final class DataModelTest {
       vc01.increaseDataRate(-20);
       vc02.increaseDataRate(-20);
 
-      spawn(new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
+      spawn(this.mission, new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
 
       // All channels should start with 20 MBits
       var expectedVC00data = 20.0;
@@ -170,13 +170,10 @@ public final class DataModelTest {
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   public @Nested final class ODYDelayVC00Tests {
 
-    @RegisterExtension
-    public static final MerlinExtension<ActivityTypes, Mission> ext = new MerlinExtension<>();
-
     private final Mission mission;
     private final DataModel dataModel;
 
-    public ODYDelayVC00Tests(final MerlinTestContext<ActivityTypes, Mission> ctx) {
+    public ODYDelayVC00Tests(final Registrar registrar) {
       final var channelsExcludingV01 = new ArrayList<>(List.of(DataConfig.ChannelName.values()));
       channelsExcludingV01.remove(VC01);
 
@@ -193,8 +190,7 @@ public final class DataModelTest {
               OrbiterConfiguration.defaults
           )
       );
-      mission = new Mission(ctx.registrar(), Instant.EPOCH, config);
-      ctx.use(mission, ActivityTypes::register);
+      mission = new Mission(registrar, Instant.EPOCH, config);
       dataModel = mission.dataModel;
     }
 
@@ -215,7 +211,7 @@ public final class DataModelTest {
       vc01.increaseDataRate(-20);
       vc02.increaseDataRate(-20);
 
-      spawn(new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
+      spawn(this.mission, new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
 
       // All channels should start with 20 MBits
       var expectedVC00data = 20.0;
@@ -266,7 +262,7 @@ public final class DataModelTest {
       vc02.increaseDataRate(-20);
 
       mission.commModel.setAlternateUhfBlockInUse(CommModel.Orbiter.ODY, true);
-      spawn(new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
+      spawn(this.mission, new UHFActive("ODY_TestID", 20, Duration.of(10, SECONDS)));
 
       // All channels should start with 20 MBits
       var expectedVC00data = 20.0;

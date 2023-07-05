@@ -21,7 +21,7 @@ public final class SeisStopHeater {
   @EffectModel
   public void run(final Mission mission) {
     final var end = mission.clocks.getCurrentTime().plus(duration);
-    spawn(new SeisPowerHeatersInfrastructure(false));
+    spawn(mission, new SeisPowerHeatersInfrastructure(false));
     waitUntil(mission.clocks.whenTimeIsReached(end));
   }
 }
